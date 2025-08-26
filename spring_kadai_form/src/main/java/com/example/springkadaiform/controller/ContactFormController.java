@@ -1,5 +1,6 @@
 package com.example.springkadaiform.controller;
 
+import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,9 +32,9 @@ public class ContactFormController {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("contactForm", form);
 			//	バリデーションエラーが発生した際に、リダイレクト先の画面でもエラーメッセージを表示したい場合に実装		
-			//			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX
-			//					+ Conventions.getVariableName(form), result);
-			return "redirect:/contactFormView";
+						redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX
+								+ Conventions.getVariableName(form), result);
+			return "redirect:/form";
 		} else {
 			//	バリデーションOKの場合は/confirmのまま、確認画面（リダイレクト先）に入力データが表示される
 			model.addAttribute("contactForm", form);
