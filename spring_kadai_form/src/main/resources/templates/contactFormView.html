@@ -28,8 +28,8 @@
 		</div>
 		<div>
 			<label for="message">お問い合わせ内容:</label>
-			<textarea th:field="*{message}"></textarea>
-			<span th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="error-message"></span>
+			<textarea th:field="*{textarea}"></textarea>
+			<span th:if="${#fields.hasErrors('textarea')}" th:errors="*{textarea}" class="error-message"></span>
 		</div>
 		<button type="submit">送信</button>
 	</form>

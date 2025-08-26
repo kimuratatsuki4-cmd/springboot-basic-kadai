@@ -22,14 +22,14 @@ public class ContactFormController {
 			@Validated ContactForm form, BindingResult result) {
 		// バリデーションNGの場合は/formへリダイレクト
 		if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("ContactForm", form);
+			redirectAttributes.addFlashAttribute("contactForm", form);
 			//	バリデーションエラーが発生した際に、リダイレクト先の画面でもエラーメッセージを表示したい場合に実装		
 //			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX
 //					+ Conventions.getVariableName(form), result);
 			return "contactFormView";
 		} else {
 			//	バリデーションOKの場合は/confirmのまま、確認画面（リダイレクト先）に入力データが表示される
-			redirectAttributes.addFlashAttribute("ContactForm", form);
+			redirectAttributes.addFlashAttribute("contactForm", form);
 			return "redirect:/confirmView";
 		}
 
