@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>電卓</title>
+</head>
+<body>
+    <h1>電卓</h1>
+    <form th:action="@{/calculator}" th:object="${calculatorForm}" method="post">
+        <label>数値1:</label>
+        <input type="text" th:field="*{num1}" required />
+        <br />
+        <label>演算子:</label>
+        <select th:field="*{operator}">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <br />
+        <label>数値2:</label>
+        <input type="text" th:field="*{num2}" required />
+        <br />
+        <button type="submit">=</button>
+    </form>
+
+    <div>
+        <label>計算結果:</label>
+        <output th:text="${result}">--</output>
+    </div>
+
+    <div th:if="${errorMessage}">
+        <p style="color: red;" th:text="${errorMessage}"></p>
+    </div>
+</body>
+</html>
