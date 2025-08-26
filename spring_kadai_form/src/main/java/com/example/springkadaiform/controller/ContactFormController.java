@@ -1,6 +1,7 @@
 package com.example.springkadaiform.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,24 +14,30 @@ import com.example.springkadaiform.form.ContactForm;
 public class ContactFormController {
 
 	@GetMapping("/form")
-	public String showForm() {
+	public String showForm(Model model) {
+
+		if (!model.containsAttribute("contactForm")) {
+			// ビューにフォームクラスのインスタンスを渡す
+			model.addAttribute("contactForm", new ContactForm());
+		}
+
 		return "contactFormView";
 	}
 
 	@PostMapping("/confirm")
-	public String registerUser(RedirectAttributes redirectAttributes,
+	public String registerUser(Model model, RedirectAttributes redirectAttributes,
 			@Validated ContactForm form, BindingResult result) {
 		// バリデーションNGの場合は/formへリダイレクト
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("contactForm", form);
 			//	バリデーションエラーが発生した際に、リダイレクト先の画面でもエラーメッセージを表示したい場合に実装		
-//			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX
-//					+ Conventions.getVariableName(form), result);
-			return "contactFormView";
+			//			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX
+			//					+ Conventions.getVariableName(form), result);
+			return "redirect:/contactFormView";
 		} else {
 			//	バリデーションOKの場合は/confirmのまま、確認画面（リダイレクト先）に入力データが表示される
-			redirectAttributes.addFlashAttribute("contactForm", form);
-			return "redirect:/confirmView";
+			model.addAttribute("contactForm", form);
+			return "confirmView";
 		}
 
 	}

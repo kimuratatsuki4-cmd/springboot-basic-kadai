@@ -8,8 +8,16 @@
 </head>
 
 <body>
+	 <style>
+        .my-table {
+            border-collapse: collapse; /* セルの間に仕切り線を引く */
+        }
+        .my-table th, .my-table td {
+            border: 3px double black;
+        }
+    </style>
 	<h2>入力内容をご確認ください</h2>
-	<table th:each="contactform : ${ContactForm}">
+	<table class="my-table" th:each="contactform : ${contactForm}">
 		<thead>
 			<tr>
 				<th>項目</th>
@@ -19,15 +27,15 @@
 		<tbody>
 			<tr>
 				<td>お名前</td>
-				<td th:text="${contactform.getName()}"></td>
+				<td th:text="${contactForm.getName()}"></td>
 			</tr>
 			<tr>
 				<td>メールアドレス</td>
-				<td th:text="${contactform.getEmail()}"></td>
+				<td th:text="${contactForm.getEmail()}"></td>
 			</tr>
 			<tr>
 				<td>お問い合わせ内容</td>
-				<td th:text="${contactform.getTextara()}"></td>
+				<td th:text="${contactForm.getTextarea()}"></td>
 			</tr>
 		</tbody>
 	</table>
